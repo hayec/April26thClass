@@ -1,0 +1,39 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+public class ConnectToDB {
+
+	public static void main(String[] args) 
+	{
+		Connection conn = null;
+		try
+		{
+			String username = "root";
+			String password = "student";
+			String url = "jbdc:mysql.jdbc://localhost/test";
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = DriverManager.getConnection(url, username, password);
+			System.out.println("Database Connection Successful");
+		}
+		catch(Exception e)
+		{
+			System.out.println("Cannot connect to database");
+		}
+		finally
+		{
+			if(conn != null)
+			{
+				try
+				{
+					conn.close();
+					System.out.println("Database connection closed");
+				}
+				catch(Exception e)
+				{
+					System.out.println("Database connection cannot close");
+				}
+			}
+		}
+
+	}
+
+}
